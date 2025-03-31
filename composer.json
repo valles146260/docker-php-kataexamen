@@ -1,5 +1,5 @@
 {
-    "name": "deg540/docker-php-boilerplate",
+    "name": "deg540/docker-php-kataexamen",
     "description": "Docker PHP testing boilerplate",
     "type": "project",
     "require-dev": {
@@ -7,8 +7,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Deg540\\DockerPHPBoilerplate\\": "src",
-            "Deg540\\DockerPHPBoilerplate\\Test\\": "tests"
+            "Deg540\\DockerPHPKataExamen\\": "src",
+            "Deg540\\DockerPHPKataExamen\\Test\\": "tests"
         }
     },
     "require": {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Deg540\DockerPHPBoilerplate\Test;
+namespace Deg540\DockerPHPKataExamen\Test;
 
-use Deg540\DockerPHPBoilerplate\Example;
+use Deg540\DockerPHPKataExamen\Example;
 use PHPUnit\Framework\TestCase;
 
 class ExampleTest extends TestCase
