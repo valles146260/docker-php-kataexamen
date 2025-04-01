@@ -19,4 +19,16 @@ class CompraTest extends TestCase
         $this->assertEquals('pan x1', $result);
     }
 
+    /**
+     * @test
+     */
+    public function test()
+    {
+        $example = new Compra();
+
+        $result = $example->listarCompra("añadir pan 4");
+
+        $this->assertEquals('pan x4', $result);
+    }
+
 }
