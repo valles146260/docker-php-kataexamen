@@ -34,16 +34,30 @@ class CompraTest extends TestCase
     /**
      * @test
      */
-    public function removerProducto()
+    public function dadoUnaListaConUnProductoEliminaProducto()
     {
         $compra = new Compra();
 
         $compra->listarCompra("añadir pan");
-        $compra->listarCompra("añadir leche 3");
 
         $result = $compra->listarCompra("eliminar pan");
 
-        $this->assertEquals('leche x3', $result);
+        $this->assertEquals('', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function dadoUnaListaConVariosProductoEliminaProducto()
+    {
+        $compra = new Compra();
+
+        $compra->listarCompra("añadir pan");
+        $compra->listarCompra("añadir leche 4");
+
+        $result = $compra->listarCompra("eliminar pan");
+
+        $this->assertEquals('leche x4', $result);
     }
 
 
