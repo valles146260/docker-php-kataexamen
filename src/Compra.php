@@ -28,7 +28,7 @@ class Compra
             return 'El producto seleccionado no existe';
         }
 
-        if ($accion === 'vaciar') {
+        if ($this->esVaciar($accion)) {
             $this->listaProductos = [];
             return '';
         }
@@ -67,9 +67,6 @@ class Compra
         return $this->formatearListaString();
     }
 
-    /**
-     * @return string
-     */
     public function formatearListaString(): string
     {
         return implode(', ', array_map(
@@ -87,6 +84,11 @@ class Compra
     public function hayProductos(mixed $producto): bool
     {
         return isset($this->listaProductos[$producto]);
+    }
+
+    public function esVaciar(mixed $accion): bool
+    {
+        return $accion === 'vaciar';
     }
 }
 

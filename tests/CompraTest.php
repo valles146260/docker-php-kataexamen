@@ -57,7 +57,7 @@ class CompraTest extends TestCase
     /**
      * @test
      */
-    public function vaciar()
+    public function dadoUnaListaVaciaDevuelveListaVacia()
     {
         $this->assertEquals('', $this->compra->listarCompra("vaciar"));
     }
