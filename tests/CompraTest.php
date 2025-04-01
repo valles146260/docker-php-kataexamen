@@ -10,11 +10,11 @@ class CompraTest extends TestCase
     /**
      * @test
      */
-    public function givenAProductWithoutQuantityReturnsProductx1()
+    public function dadoUnProductoSinCantidadDevuelveProductox1()
     {
-        $example = new Compra();
+        $compra = new Compra();
 
-        $result = $example->listarCompra("añadir pan");
+        $result = $compra->listarCompra("añadir pan");
 
         $this->assertEquals('pan x1', $result);
     }
@@ -22,13 +22,29 @@ class CompraTest extends TestCase
     /**
      * @test
      */
-    public function givenAProductWithQuantityReturnsProductxQuantity()
+    public function dadoUnProductoConCantidadDevuelveProductoConCantidad()
     {
-        $example = new Compra();
+        $compra = new Compra();
 
-        $result = $example->listarCompra("añadir pan 4");
+        $result = $compra->listarCompra("añadir Pan 4");
 
         $this->assertEquals('pan x4', $result);
     }
+
+    /**
+     * @test
+     */
+    public function removerProducto()
+    {
+        $compra = new Compra();
+
+        $compra->listarCompra("añadir pan");
+        $compra->listarCompra("añadir leche 3");
+
+        $result = $compra->listarCompra("eliminar pan");
+
+        $this->assertEquals('leche x3', $result);
+    }
+
 
 }

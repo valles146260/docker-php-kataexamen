@@ -12,12 +12,19 @@ class Compra
         [$accion, $producto, $cantidad] = $this->extraerInstruccion($instruccion);
 
         if ($this->esAnadir($accion)) {
-            $producto = strtolower($producto);
-            $cantidad = $cantidad ?? 1;
 
             $this->listaProductos[$producto] = ($this->listaProductos[$producto] ?? 0) + $cantidad;
 
             return $this->generarLista();
+        }
+        if ($accion === 'eliminar') {
+            if (isset($this->listaProductos[$producto])) {
+                unset($this->listaProductos[$producto]);
+
+                return $this->generarLista();
+            }
+
+            return 'El producto seleccionado no existe';
         }
 
         return '';
@@ -28,6 +35,7 @@ class Compra
         $partes = explode(' ', strtolower(trim($instruccion)));
         $accion = $partes[0];
         $producto = $partes[1] ?? '';
+        $producto = strtolower($producto);
         $cantidad = isset($partes[2]) && is_numeric($partes[2]) ? (int)$partes[2] : 1;
 
         return [$accion, $producto, $cantidad];
