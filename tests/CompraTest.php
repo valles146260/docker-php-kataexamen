@@ -62,5 +62,17 @@ class CompraTest extends TestCase
         $this->assertEquals('', $this->compra->listarCompra("vaciar"));
     }
 
+    /**
+     * @test
+     */
+    public function vaciarLista()
+    {
+        $this->assertEquals('pan x1', $this->compra->listarCompra("añadir Pan"));
+
+        $this->assertEquals('leche x4, pan x1', $this->compra->listarCompra("añadir leche 4"));
+
+        $this->assertEquals('', $this->compra->listarCompra("vaciar"));
+    }
+
 
 }
