@@ -7,16 +7,21 @@ use PHPUnit\Framework\TestCase;
 
 class CompraTest extends TestCase
 {
+    private compra $compra;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->compra = new Compra();
+    }
+
     /**
      * @test
      */
     public function dadoUnProductoSinCantidadDevuelveProductox1()
     {
-        $compra = new Compra();
-
-        $result = $compra->listarCompra("añadir pan");
-
-        $this->assertEquals('pan x1', $result);
+        $this->assertEquals('pan x1', $this->compra->listarCompra("añadir Pan"));
     }
 
     /**
@@ -24,11 +29,7 @@ class CompraTest extends TestCase
      */
     public function dadoUnProductoConCantidadDevuelveProductoConCantidad()
     {
-        $compra = new Compra();
-
-        $result = $compra->listarCompra("añadir Pan 4");
-
-        $this->assertEquals('pan x4', $result);
+        $this->assertEquals('pan x4', $this->compra->listarCompra("añadir Pan 4"));
     }
 
     /**
@@ -36,13 +37,9 @@ class CompraTest extends TestCase
      */
     public function dadoUnaListaConUnProductoEliminaProducto()
     {
-        $compra = new Compra();
+        $this->assertEquals('pan x1', $this->compra->listarCompra("añadir Pan"));
 
-        $compra->listarCompra("añadir pan");
-
-        $result = $compra->listarCompra("eliminar pan");
-
-        $this->assertEquals('', $result);
+        $this->assertEquals('', $this->compra->listarCompra("eliminar pan"));
     }
 
     /**
@@ -50,15 +47,11 @@ class CompraTest extends TestCase
      */
     public function dadoUnaListaConVariosProductoEliminaProducto()
     {
-        $compra = new Compra();
+        $this->assertEquals('pan x1', $this->compra->listarCompra("añadir Pan"));
 
-        $compra->listarCompra("añadir pan");
-        $compra->listarCompra("añadir leche 4");
+        $this->assertEquals('leche x4, pan x1', $this->compra->listarCompra("añadir leche 4"));
 
-        $result = $compra->listarCompra("eliminar pan");
-
-        $this->assertEquals('leche x4', $result);
+        $this->assertEquals('leche x4', $this->compra->listarCompra("eliminar pan"));
     }
-
 
 }
