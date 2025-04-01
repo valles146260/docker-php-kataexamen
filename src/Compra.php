@@ -8,15 +8,25 @@ class Compra
     {
         $lista = [];
 
-        $instruccion = explode(" ", $instruccion);
-        $producto = $instruccion[1];
-        $cantidad = $instruccion[3] ?? 1;
+        list($instruccion, $producto, $cantidad) = $this->extraerInstruccion($instruccion);
 
-
-        if($instruccion[0] === 'añadir') {
+        if($this->esAnadir($instruccion[0])) {
             return $producto . ' x' . $cantidad;
         }
         return '';
+    }
+
+    public function extraerInstruccion(string $instruccion): array
+    {
+        $instruccion = explode(" ", $instruccion);
+        $producto = $instruccion[1];
+        $cantidad = $instruccion[3] ?? 1;
+        return array($instruccion, $producto, $cantidad);
+    }
+
+    public function esAnadir($instruccion): bool
+    {
+        return $instruccion === 'añadir';
     }
 
 }
