@@ -17,17 +17,7 @@ class Compra
 
             $this->listaProductos[$producto] = ($this->listaProductos[$producto] ?? 0) + $cantidad;
 
-            if (empty($this->listaProductos)) {
-                return '';
-            }
-
-            ksort($this->listaProductos);
-
-            return implode(', ', array_map(
-                fn($producto, $cantidad) => "$producto x$cantidad",
-                array_keys($this->listaProductos),
-                $this->listaProductos
-            ));
+            return $this->generarLista();
         }
 
         return '';
@@ -46,6 +36,29 @@ class Compra
     public function esAnadir($accion): bool
     {
         return $accion === 'añadir';
+    }
+
+    public function generarLista(): string
+    {
+        if (empty($this->listaProductos)) {
+            return '';
+        }
+
+        ksort($this->listaProductos);
+
+        return $this->formatearListaString();
+    }
+
+    /**
+     * @return string
+     */
+    public function formatearListaString(): string
+    {
+        return implode(', ', array_map(
+            fn($producto, $cantidad) => "$producto x$cantidad",
+            array_keys($this->listaProductos),
+            $this->listaProductos
+        ));
     }
 }
 

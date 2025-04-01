@@ -22,7 +22,7 @@ class CompraTest extends TestCase
     /**
      * @test
      */
-    public function test()
+    public function givenAProductWithQuantityReturnsProductxQuantity()
     {
         $example = new Compra();
 
