@@ -8,7 +8,6 @@ class Compra
 
     public function listarCompra(string $instruccion): string
     {
-
         [$accion, $producto, $cantidad] = $this->extraerInstruccion($instruccion);
 
         if ($this->esAnadir($accion)) {
@@ -17,8 +16,11 @@ class Compra
 
             return $this->generarLista();
         }
-        if ($accion === 'eliminar') {
-            if (isset($this->listaProductos[$producto])) {
+
+        if ($this->esEliminar($accion)) {
+
+            if ($this->hayProductos($producto)) {
+
                 unset($this->listaProductos[$producto]);
 
                 return $this->generarLista();
@@ -33,9 +35,13 @@ class Compra
     private function extraerInstruccion(string $instruccion): array
     {
         $partes = explode(' ', strtolower(trim($instruccion)));
+
         $accion = $partes[0];
+
         $producto = $partes[1] ?? '';
+
         $producto = strtolower($producto);
+
         $cantidad = isset($partes[2]) && is_numeric($partes[2]) ? (int)$partes[2] : 1;
 
         return [$accion, $producto, $cantidad];
@@ -67,6 +73,16 @@ class Compra
             array_keys($this->listaProductos),
             $this->listaProductos
         ));
+    }
+
+    public function esEliminar(mixed $accion): bool
+    {
+        return $accion === 'eliminar';
+    }
+
+    public function hayProductos(mixed $producto): bool
+    {
+        return isset($this->listaProductos[$producto]);
     }
 }
 
