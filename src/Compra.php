@@ -25,8 +25,12 @@ class Compra
 
                 return $this->generarLista();
             }
-
             return 'El producto seleccionado no existe';
+        }
+
+        if ($accion === 'vaciar') {
+            $this->listaProductos = [];
+            return '';
         }
 
         return '';
