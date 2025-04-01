@@ -10,7 +10,7 @@ class CompraTest extends TestCase
     /**
      * @test
      */
-    public function test()
+    public function givenAProductWithoutQuantityReturnsProductx1()
     {
         $example = new Compra();
 
@@ -18,4 +18,5 @@ class CompraTest extends TestCase
 
         $this->assertEquals('pan x1', $result);
     }
+
 }
